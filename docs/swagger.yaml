@@ -1,0 +1,515 @@
+basePath: /
+definitions:
+  internal_app.errorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+host: 127.0.0.1:8080
+info:
+  contact:
+    email: mkn-notifyer@mail.ru
+    name: MKN Support
+  description: Notification backend service.
+  title: MKN API
+  version: "1.0"
+paths:
+  /{project}:
+    delete:
+      description: Deletes project
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Deletes project
+      tags:
+      - delete
+    put:
+      description: Updates project
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Updates project
+      tags:
+      - change
+  /{project}/{section}:
+    delete:
+      description: Deletes section
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Deletes section
+      tags:
+      - delete
+    put:
+      description: Updates section
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Updates section
+      tags:
+      - change
+  /{project}/{section}/{notification}:
+    delete:
+      description: Deletes notifications
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Deletes notifications
+      tags:
+      - delete
+    get:
+      description: Gets Notification by ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Gets Notification
+      tags:
+      - info
+    put:
+      description: Updates notifications
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Updates notifications
+      tags:
+      - change
+  /{project}/{section}/notification:
+    post:
+      description: Creates notification
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Creates notification
+      tags:
+      - add
+  /{project}/{section}/notifications:
+    get:
+      description: Gets All Notifications
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Gets All Notifications
+      tags:
+      - info
+  /{project}/collaborator:
+    delete:
+      description: Deletes collaborator
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Deletes collaborator
+      tags:
+      - delete
+    post:
+      description: Adds collaborators
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Adds collaborators
+      tags:
+      - add
+  /{project}/collaborators:
+    get:
+      description: Gets collaborators
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Gets collaborators
+      tags:
+      - info
+  /{project}/section:
+    post:
+      description: Creates section
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Creates section
+      tags:
+      - add
+  /{project}/sections:
+    get:
+      description: Gets all sections
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Gets all sections
+      tags:
+      - info
+  /favorites:
+    get:
+      description: Gets favorite proj
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Gets favorite proj
+      tags:
+      - info
+  /login:
+    post:
+      description: Login user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Login user
+      tags:
+      - auth
+  /logout:
+    get:
+      description: Logout user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Logout user
+      tags:
+      - auth
+  /owned_projects:
+    get:
+      description: Gets all owned proj
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Gets all owned proj
+      tags:
+      - info
+  /project:
+    post:
+      description: Creates project
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Creates project
+      tags:
+      - add
+  /projects:
+    get:
+      description: Gets all proj
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Gets all proj
+      tags:
+      - info
+  /signup:
+    post:
+      description: Signup user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Signup user
+      tags:
+      - auth
+  /undelivered_notifications:
+    get:
+      description: Gets undelivired notifications
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Gets undelivired notifications
+      tags:
+      - info
+  /upcoming:
+    get:
+      description: Gets upcoming notifications
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Gets upcoming notifications
+      tags:
+      - info
+swagger: "2.0"
