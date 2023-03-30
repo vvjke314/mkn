@@ -4,4 +4,4 @@
  - [репозиторий бэкенда](https://github.com/vvjke314/mkn-backend)
  
  ### Документация:
-- [swagger](https://github.com/vvjke314/mkn/tree/main/docs)
+- [swagger](https://github.com/vvjke314/mkn/tree/main/docs/swagger.json)
