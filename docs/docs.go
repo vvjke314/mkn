@@ -21,19 +21,22 @@ const docTemplate = `{
     "paths": {
         "/favorites": {
             "get": {
-                "description": "Gets favorite proj",
+                "description": "Returns favorite projects",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "info"
                 ],
-                "summary": "Gets favorite proj",
+                "summary": "Gets favorite projects",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "integer"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ds.Project"
+                            }
                         }
                     },
                     "403": {
@@ -123,7 +126,10 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "integer"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ds.Project"
+                            }
                         }
                     },
                     "403": {
@@ -175,19 +181,22 @@ const docTemplate = `{
         },
         "/projects": {
             "get": {
-                "description": "Gets all proj",
+                "description": "Returns all projects",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "info"
                 ],
-                "summary": "Gets all proj",
+                "summary": "Gets all projects",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "integer"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ds.Project"
+                            }
                         }
                     },
                     "403": {
@@ -233,7 +242,7 @@ const docTemplate = `{
         },
         "/undelivered_notifications": {
             "get": {
-                "description": "Gets undelivired notifications",
+                "description": "Allows the manager to view undelivered notifications",
                 "produces": [
                     "application/json"
                 ],
@@ -245,7 +254,10 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "integer"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ds.Notification"
+                            }
                         }
                     },
                     "403": {
@@ -265,7 +277,7 @@ const docTemplate = `{
         },
         "/upcoming": {
             "get": {
-                "description": "Gets upcoming notifications",
+                "description": "Returns upcoming notifications",
                 "produces": [
                     "application/json"
                 ],
@@ -277,7 +289,10 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "integer"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ds.Notification"
+                            }
                         }
                     },
                     "403": {
@@ -297,14 +312,47 @@ const docTemplate = `{
         },
         "/{project}": {
             "put": {
-                "description": "Updates project",
+                "description": "Updates a specific project according to the entered parameters",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "change"
                 ],
-                "summary": "Updates project",
+                "summary": "Update project",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Owner ID",
+                        "name": "owner_id",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Project title",
+                        "name": "title",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Project description",
+                        "name": "description",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -333,7 +381,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "Deletes project",
+                "description": "Deletes a specific project",
                 "produces": [
                     "application/json"
                 ],
@@ -341,6 +389,15 @@ const docTemplate = `{
                     "delete"
                 ],
                 "summary": "Deletes project",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -371,7 +428,7 @@ const docTemplate = `{
         },
         "/{project}/collaborator": {
             "post": {
-                "description": "Adds collaborators",
+                "description": "Adds a collaborator to the current project",
                 "produces": [
                     "application/json"
                 ],
@@ -379,6 +436,15 @@ const docTemplate = `{
                     "add"
                 ],
                 "summary": "Adds collaborators",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -401,7 +467,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "Deletes collaborator",
+                "description": "Removes a collaborator from the current project",
                 "produces": [
                     "application/json"
                 ],
@@ -409,6 +475,15 @@ const docTemplate = `{
                     "delete"
                 ],
                 "summary": "Deletes collaborator",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -433,19 +508,28 @@ const docTemplate = `{
         },
         "/{project}/collaborators": {
             "get": {
-                "description": "Gets collaborators",
+                "description": "Returns all collaborators of the project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "info"
                 ],
-                "summary": "Gets collaborators",
+                "summary": "Returns collaborators",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "integer"
+                            "$ref": "#/definitions/ds.Collaborations"
                         }
                     },
                     "403": {
@@ -465,7 +549,7 @@ const docTemplate = `{
         },
         "/{project}/section": {
             "post": {
-                "description": "Creates section",
+                "description": "Creates a section in the project",
                 "produces": [
                     "application/json"
                 ],
@@ -473,6 +557,31 @@ const docTemplate = `{
                     "add"
                 ],
                 "summary": "Creates section",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Section title",
+                        "name": "title",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Section color",
+                        "name": "color",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -497,19 +606,31 @@ const docTemplate = `{
         },
         "/{project}/sections": {
             "get": {
-                "description": "Gets all sections",
+                "description": "Returns all sections of the current project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "info"
                 ],
-                "summary": "Gets all sections",
+                "summary": "Returns all sections",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "integer"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ds.Section"
+                            }
                         }
                     },
                     "403": {
@@ -529,7 +650,7 @@ const docTemplate = `{
         },
         "/{project}/{section}": {
             "put": {
-                "description": "Updates section",
+                "description": "Updates a section in the current project",
                 "produces": [
                     "application/json"
                 ],
@@ -537,6 +658,38 @@ const docTemplate = `{
                     "change"
                 ],
                 "summary": "Updates section",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Section ID",
+                        "name": "section_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Section title",
+                        "name": "title",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Section color",
+                        "name": "color",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -565,7 +718,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "Deletes section",
+                "description": "Deletes section from current project",
                 "produces": [
                     "application/json"
                 ],
@@ -573,6 +726,22 @@ const docTemplate = `{
                     "delete"
                 ],
                 "summary": "Deletes section",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Section ID",
+                        "name": "section_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -603,7 +772,7 @@ const docTemplate = `{
         },
         "/{project}/{section}/notification": {
             "post": {
-                "description": "Creates notification",
+                "description": "Creates notification in accordance with the entered parameters",
                 "produces": [
                     "application/json"
                 ],
@@ -611,6 +780,62 @@ const docTemplate = `{
                     "add"
                 ],
                 "summary": "Creates notification",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Section ID",
+                        "name": "section_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Notification title",
+                        "name": "title",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Notification description",
+                        "name": "description",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Notification deadline",
+                        "name": "deadline",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Notification status",
+                        "name": "status",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Notification error status",
+                        "name": "error_status",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -635,7 +860,7 @@ const docTemplate = `{
         },
         "/{project}/{section}/notifications": {
             "get": {
-                "description": "Gets All Notifications",
+                "description": "Returns all notifications in the current section",
                 "produces": [
                     "application/json"
                 ],
@@ -643,11 +868,30 @@ const docTemplate = `{
                     "info"
                 ],
                 "summary": "Gets All Notifications",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Section ID",
+                        "name": "section_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "integer"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ds.Notification"
+                            }
                         }
                     },
                     "403": {
@@ -667,7 +911,7 @@ const docTemplate = `{
         },
         "/{project}/{section}/{notification}": {
             "get": {
-                "description": "Gets Notification by ID",
+                "description": "Returns Notification by ID",
                 "produces": [
                     "application/json"
                 ],
@@ -675,11 +919,34 @@ const docTemplate = `{
                     "info"
                 ],
                 "summary": "Gets Notification",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Section ID",
+                        "name": "section_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Notification ID",
+                        "name": "notification_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "integer"
+                            "$ref": "#/definitions/ds.Notification"
                         }
                     },
                     "403": {
@@ -703,14 +970,77 @@ const docTemplate = `{
                 }
             },
             "put": {
-                "description": "Updates notifications",
+                "description": "Update information about a specific notification according to the entered parameters",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "change"
                 ],
-                "summary": "Updates notifications",
+                "summary": "Update notifications",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Section ID",
+                        "name": "section_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Notification ID",
+                        "name": "notification_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Notification title",
+                        "name": "title",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Notification description",
+                        "name": "description",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Notification deadline",
+                        "name": "deadline",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Notification status",
+                        "name": "status",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Notification error status",
+                        "name": "error_status",
+                        "in": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -739,14 +1069,37 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "Deletes notifications",
+                "description": "Update information about a specific notification",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "delete"
                 ],
-                "summary": "Deletes notifications",
+                "summary": "Delete notifications",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "project_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Section ID",
+                        "name": "section_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Notification ID",
+                        "name": "notification_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -777,6 +1130,80 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "ds.Collaborations": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "project_id": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "ds.Notification": {
+            "type": "object",
+            "properties": {
+                "deadline": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "error_status": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "section_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "ds.Project": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "owner_id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "ds.Section": {
+            "type": "object",
+            "properties": {
+                "color": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "project_id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
         "internal_app.errorResponse": {
             "type": "object",
             "properties": {
