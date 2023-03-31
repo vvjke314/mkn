@@ -1,6 +1,15 @@
 basePath: /
 definitions:
-  ds.Collaborations:
+  ds.Collaboration:
+    properties:
+      id:
+        type: string
+      project_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  ds.FavoriteProject:
     properties:
       id:
         type: string
@@ -28,9 +37,13 @@ definitions:
     type: object
   ds.Project:
     properties:
+      color:
+        type: string
       description:
         type: string
       id:
+        type: string
+      last_edited:
         type: string
       owner_id:
         type: string
@@ -48,6 +61,17 @@ definitions:
       title:
         type: string
     type: object
+  ds.User:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      is_manager:
+        type: boolean
+      username:
+        type: string
+    type: object
   internal_app.errorResponse:
     properties:
       message:
@@ -62,13 +86,58 @@ info:
   title: MKN API
   version: "1.0"
 paths:
-  /{project}:
+  /email:
+    put:
+      description: Changes user email
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.FavoriteProject'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Changes user email
+      tags:
+      - change
+  /favorite:
     delete:
-      description: Deletes a specific project
+      description: Delete favorite user project
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.FavoriteProject'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Delete favorite project
+      tags:
+      - delete
+    post:
+      description: Add favorite project
       parameters:
       - description: Project ID
-        in: path
-        name: id
+        in: query
+        name: project_id
         required: true
         type: string
       produces:
@@ -77,7 +146,147 @@ paths:
         "200":
           description: OK
           schema:
-            type: integer
+            items:
+              $ref: '#/definitions/ds.FavoriteProject'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Add favorite project
+      tags:
+      - add
+  /favorites:
+    get:
+      description: Returns favorite projects
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ds.FavoriteProject'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Gets favorite projects
+      tags:
+      - info
+  /login:
+    post:
+      description: Login user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ds.User'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Login user
+      tags:
+      - auth
+  /logout:
+    get:
+      description: Logout user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ds.User'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Logout user
+      tags:
+      - auth
+  /owned_projects:
+    get:
+      description: Gets all owned project
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.Project'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Gets all owned project
+      tags:
+      - info
+  /project:
+    post:
+      description: Creates project
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.Project'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Creates project
+      tags:
+      - add
+  /project/{project_id}:
+    delete:
+      description: Deletes a specific project
+      parameters:
+      - description: Project ID
+        in: path
+        name: project_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.Project'
+            type: array
         "403":
           description: Forbidden
           schema:
@@ -98,31 +307,18 @@ paths:
       parameters:
       - description: Project ID
         in: path
-        name: id
+        name: project_id
         required: true
         type: string
-      - description: Owner ID
-        in: body
-        name: owner_id
-        schema:
-          type: string
-      - description: Project title
-        in: body
-        name: title
-        schema:
-          type: string
-      - description: Project description
-        in: body
-        name: description
-        schema:
-          type: string
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            type: integer
+            items:
+              $ref: '#/definitions/ds.Project'
+            type: array
         "403":
           description: Forbidden
           schema:
@@ -138,15 +334,154 @@ paths:
       summary: Update project
       tags:
       - change
-  /{project}/{section}:
+  /project/{project_id}/collaborator:
     delete:
-      description: Deletes section from current project
+      description: Removes a collaborator from the current project
       parameters:
       - description: Project ID
         in: path
         name: project_id
         required: true
         type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.Collaboration'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Deletes collaborator
+      tags:
+      - delete
+    post:
+      description: Adds a collaborator to the current project
+      parameters:
+      - description: Project ID
+        in: path
+        name: project_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.Collaboration'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Adds collaborators
+      tags:
+      - add
+  /project/{project_id}/collaborators:
+    get:
+      description: Returns all collaborators of the project
+      parameters:
+      - description: Project ID
+        in: path
+        name: project_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.Collaboration'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Returns collaborators
+      tags:
+      - info
+  /project/{project_id}/section:
+    post:
+      description: Creates a section in the project
+      parameters:
+      - description: Project ID
+        in: path
+        name: project_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.Section'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Creates section
+      tags:
+      - add
+  /project/{project_id}/sections:
+    get:
+      description: Returns all sections of the current project
+      parameters:
+      - description: Project ID
+        in: path
+        name: project_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.Section'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Returns all sections
+      tags:
+      - info
+  /project/section/{section_id}:
+    delete:
+      description: Deletes section from current project
+      parameters:
       - description: Section ID
         in: path
         name: section_id
@@ -158,7 +493,9 @@ paths:
         "200":
           description: OK
           schema:
-            type: integer
+            items:
+              $ref: '#/definitions/ds.Section'
+            type: array
         "403":
           description: Forbidden
           schema:
@@ -177,33 +514,20 @@ paths:
     put:
       description: Updates a section in the current project
       parameters:
-      - description: Project ID
-        in: path
-        name: project_id
-        required: true
-        type: string
       - description: Section ID
         in: path
         name: section_id
         required: true
         type: string
-      - description: Section title
-        in: body
-        name: title
-        schema:
-          type: string
-      - description: Section color
-        in: body
-        name: color
-        schema:
-          type: string
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            type: integer
+            items:
+              $ref: '#/definitions/ds.Section'
+            type: array
         "403":
           description: Forbidden
           schema:
@@ -219,20 +543,68 @@ paths:
       summary: Updates section
       tags:
       - change
-  /{project}/{section}/{notification}:
-    delete:
-      description: Update information about a specific notification
+  /project/section/{section_id}/notification:
+    post:
+      description: Creates notification in accordance with the entered parameters
       parameters:
-      - description: Project ID
-        in: path
-        name: project_id
-        required: true
-        type: string
       - description: Section ID
         in: path
         name: section_id
         required: true
         type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.Notification'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Creates notification
+      tags:
+      - add
+  /project/section/{section_id}/notifications:
+    get:
+      description: Returns all notifications in the current section
+      parameters:
+      - description: Section ID
+        in: path
+        name: section_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.Notification'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/internal_app.errorResponse'
+      summary: Gets All Notifications
+      tags:
+      - info
+  /project/section/notification/{notification_id}:
+    delete:
+      description: Update information about a specific notification
+      parameters:
       - description: Notification ID
         in: path
         name: notification_id
@@ -244,7 +616,9 @@ paths:
         "200":
           description: OK
           schema:
-            type: integer
+            items:
+              $ref: '#/definitions/ds.Notification'
+            type: array
         "403":
           description: Forbidden
           schema:
@@ -263,16 +637,6 @@ paths:
     get:
       description: Returns Notification by ID
       parameters:
-      - description: Project ID
-        in: path
-        name: project_id
-        required: true
-        type: string
-      - description: Section ID
-        in: path
-        name: section_id
-        required: true
-        type: string
       - description: Notification ID
         in: path
         name: notification_id
@@ -304,137 +668,9 @@ paths:
       description: Update information about a specific notification according to the
         entered parameters
       parameters:
-      - description: Project ID
-        in: path
-        name: project_id
-        required: true
-        type: string
-      - description: Section ID
-        in: path
-        name: section_id
-        required: true
-        type: string
       - description: Notification ID
         in: path
         name: notification_id
-        required: true
-        type: string
-      - description: Notification title
-        in: body
-        name: title
-        schema:
-          type: string
-      - description: Notification description
-        in: body
-        name: description
-        schema:
-          type: string
-      - description: Notification deadline
-        in: body
-        name: deadline
-        schema:
-          type: string
-      - description: Notification status
-        in: body
-        name: status
-        schema:
-          type: string
-      - description: Notification error status
-        in: body
-        name: error_status
-        schema:
-          type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: integer
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Update notifications
-      tags:
-      - change
-  /{project}/{section}/notification:
-    post:
-      description: Creates notification in accordance with the entered parameters
-      parameters:
-      - description: Project ID
-        in: path
-        name: project_id
-        required: true
-        type: string
-      - description: Section ID
-        in: path
-        name: section_id
-        required: true
-        type: string
-      - description: Notification title
-        in: body
-        name: title
-        schema:
-          type: string
-      - description: Notification description
-        in: body
-        name: description
-        schema:
-          type: string
-      - description: Notification deadline
-        in: body
-        name: deadline
-        schema:
-          type: string
-      - description: Notification status
-        in: body
-        name: status
-        schema:
-          type: string
-      - description: Notification error status
-        in: body
-        name: error_status
-        schema:
-          type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: integer
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Creates notification
-      tags:
-      - add
-  /{project}/{section}/notifications:
-    get:
-      description: Returns all notifications in the current section
-      parameters:
-      - description: Project ID
-        in: path
-        name: project_id
-        required: true
-        type: string
-      - description: Section ID
-        in: path
-        name: section_id
         required: true
         type: string
       produces:
@@ -450,264 +686,17 @@ paths:
           description: Forbidden
           schema:
             $ref: '#/definitions/internal_app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Gets All Notifications
-      tags:
-      - info
-  /{project}/collaborator:
-    delete:
-      description: Removes a collaborator from the current project
-      parameters:
-      - description: Project ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: integer
-        "403":
-          description: Forbidden
+        "404":
+          description: Not Found
           schema:
             $ref: '#/definitions/internal_app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
             $ref: '#/definitions/internal_app.errorResponse'
-      summary: Deletes collaborator
+      summary: Update notifications
       tags:
-      - delete
-    post:
-      description: Adds a collaborator to the current project
-      parameters:
-      - description: Project ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: integer
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Adds collaborators
-      tags:
-      - add
-  /{project}/collaborators:
-    get:
-      description: Returns all collaborators of the project
-      parameters:
-      - description: Project ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/ds.Collaborations'
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Returns collaborators
-      tags:
-      - info
-  /{project}/section:
-    post:
-      description: Creates a section in the project
-      parameters:
-      - description: Project ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Section title
-        in: body
-        name: title
-        schema:
-          type: string
-      - description: Section color
-        in: body
-        name: color
-        schema:
-          type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: integer
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Creates section
-      tags:
-      - add
-  /{project}/sections:
-    get:
-      description: Returns all sections of the current project
-      parameters:
-      - description: Project ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/ds.Section'
-            type: array
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Returns all sections
-      tags:
-      - info
-  /favorites:
-    get:
-      description: Returns favorite projects
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/ds.Project'
-            type: array
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Gets favorite projects
-      tags:
-      - info
-  /login:
-    post:
-      description: Login user
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: integer
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Login user
-      tags:
-      - auth
-  /logout:
-    get:
-      description: Logout user
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: integer
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Logout user
-      tags:
-      - auth
-  /owned_projects:
-    get:
-      description: Gets all owned proj
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/ds.Project'
-            type: array
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Gets all owned proj
-      tags:
-      - info
-  /project:
-    post:
-      description: Creates project
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: integer
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Creates project
-      tags:
-      - add
+      - change
   /projects:
     get:
       description: Returns all projects
@@ -740,7 +729,7 @@ paths:
         "200":
           description: OK
           schema:
-            type: integer
+            $ref: '#/definitions/ds.User'
         "500":
           description: Internal Server Error
           schema:
