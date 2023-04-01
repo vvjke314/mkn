@@ -98,7 +98,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/favorite/:project_id": {
+        "/favorite/{project_id}": {
             "delete": {
                 "description": "Delete favorite user project",
                 "produces": [
@@ -177,7 +177,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/favorites/:project_id": {
+        "/favorites/{project_id}": {
             "get": {
                 "description": "Returns favorite projects",
                 "produces": [

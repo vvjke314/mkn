@@ -138,7 +138,7 @@ paths:
       summary: Add favorite project
       tags:
       - add
-  /favorite/:project_id:
+  /favorite/{project_id}:
     delete:
       description: Delete favorite user project
       parameters:
@@ -190,7 +190,7 @@ paths:
       summary: Gets favorite projects
       tags:
       - info
-  /favorites/:project_id:
+  /favorites/{project_id}:
     get:
       description: Returns favorite projects
       parameters:
