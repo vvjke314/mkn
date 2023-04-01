@@ -96,7 +96,9 @@ const docTemplate = `{
                         }
                     }
                 }
-            },
+            }
+        },
+        "/favorite/:project_id": {
             "delete": {
                 "description": "Delete favorite user project",
                 "produces": [
@@ -106,6 +108,15 @@ const docTemplate = `{
                     "delete"
                 ],
                 "summary": "Delete favorite project",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "project_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -141,6 +152,50 @@ const docTemplate = `{
                     "info"
                 ],
                 "summary": "Gets favorite projects",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ds.FavoriteProject"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/internal_app.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/internal_app.errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/favorites/:project_id": {
+            "get": {
+                "description": "Returns favorite projects",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "info"
+                ],
+                "summary": "Gets favorite projects",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "project_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -204,41 +259,6 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/ds.User"
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/owned_projects": {
-            "get": {
-                "description": "Gets all owned project",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "info"
-                ],
-                "summary": "Gets all owned project",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ds.Project"
-                            }
                         }
                     },
                     "403": {
@@ -952,6 +972,76 @@ const docTemplate = `{
                     "info"
                 ],
                 "summary": "Gets all projects",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ds.Project"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/internal_app.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/internal_app.errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/projects/latest": {
+            "get": {
+                "description": "Returns the last three projects by last edit time",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "info"
+                ],
+                "summary": "Returns last 3 projects",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ds.Project"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/internal_app.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/internal_app.errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/projects/owned": {
+            "get": {
+                "description": "Gets all owned project",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "info"
+                ],
+                "summary": "Gets all owned project",
                 "responses": {
                     "200": {
                         "description": "OK",
