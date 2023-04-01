@@ -11,7 +11,7 @@
 
 ### Документация:
 
-- [swagger](https://github.com/vvjke314/mkn/tree/main/docs/swagger/swagger.json)
+- Swagger: [посмотреть(preview)](https://vvjke314.github.io/mkn/) [файл](https://github.com/vvjke314/mkn/tree/main/docs/swagger/swagger.json)
 - Техническое задание - [pdf](https://github.com/vvjke314/mkn/tree/main/docs/tech-spec/TZ_Zaycev_Eremihin_Abramov.pdf) [docx](https://github.com/vvjke314/mkn/tree/main/docs/tech-spec/TZ_Zaycev_Eremihin_Abramov.docx)
 
 ### Диаграммы
