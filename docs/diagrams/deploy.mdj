@@ -597,7 +597,7 @@
 												"$ref": "AAAAAAGE5tvPgDLjnYU="
 											},
 											"font": "Arial;13;0",
-											"left": 533,
+											"left": 541,
 											"top": 223,
 											"width": 645,
 											"height": 13,
@@ -610,11 +610,11 @@
 												"$ref": "AAAAAAGE5tvPgDLjnYU="
 											},
 											"font": "Arial;13;1",
-											"left": 533,
+											"left": 541,
 											"top": 238,
 											"width": 645,
 											"height": 13,
-											"text": "Сервер приложения"
+											"text": "Application server (Ubuntu)"
 										},
 										{
 											"_type": "LabelView",
@@ -624,7 +624,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 672,
+											"left": 688,
 											"top": -400,
 											"width": 73.67724609375,
 											"height": 13,
@@ -638,14 +638,14 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 672,
+											"left": 688,
 											"top": -400,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 528,
+									"left": 536,
 									"top": 218,
 									"width": 655,
 									"height": 38,
@@ -674,7 +674,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 392,
-									"top": -64,
+									"top": -72,
 									"width": 10,
 									"height": 10
 								},
@@ -690,7 +690,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 392,
-									"top": -64,
+									"top": -72,
 									"width": 10,
 									"height": 10
 								},
@@ -706,7 +706,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 392,
-									"top": -64,
+									"top": -72,
 									"width": 10,
 									"height": 10
 								},
@@ -722,14 +722,14 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 392,
-									"top": -64,
+									"top": -72,
 									"width": 10,
 									"height": 10
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 528,
+							"left": 536,
 							"top": 208,
 							"width": 665,
 							"height": 649,
@@ -807,9 +807,9 @@
 											"font": "Arial;13;0",
 											"left": 1296,
 											"top": -480,
-											"width": 160.70361328125,
+											"width": 195.787109375,
 											"height": 13,
-											"text": "(from Сервер приложения)"
+											"text": "(from Application server (Ubuntu))"
 										},
 										{
 											"_type": "LabelView",
@@ -988,9 +988,9 @@
 											"font": "Arial;13;0",
 											"left": 944,
 											"top": -16,
-											"width": 160.70361328125,
+											"width": 195.787109375,
 											"height": 13,
-											"text": "(from Сервер приложения)"
+											"text": "(from Application server (Ubuntu))"
 										},
 										{
 											"_type": "LabelView",
@@ -2081,9 +2081,9 @@
 											"font": "Arial;13;0",
 											"left": 352,
 											"top": 656,
-											"width": 160.70361328125,
+											"width": 195.787109375,
 											"height": 13,
-											"text": "(from Сервер приложения)"
+											"text": "(from Application server (Ubuntu))"
 										},
 										{
 											"_type": "LabelView",
@@ -2413,8 +2413,8 @@
 												"$ref": "AAAAAAGHNK3aOCDtOps="
 											},
 											"font": "Arial;13;0",
-											"left": 973,
-											"top": 551,
+											"left": 981,
+											"top": 503,
 											"width": 165,
 											"height": 13,
 											"text": "«docker-container»"
@@ -2426,11 +2426,11 @@
 												"$ref": "AAAAAAGHNK3aOCDtOps="
 											},
 											"font": "Arial;13;1",
-											"left": 973,
-											"top": 566,
+											"left": 981,
+											"top": 518,
 											"width": 165,
 											"height": 13,
-											"text": "Брокер"
+											"text": "Apache Kafka"
 										},
 										{
 											"_type": "LabelView",
@@ -2440,11 +2440,11 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 32,
-											"top": 160,
-											"width": 160.70361328125,
+											"left": 48,
+											"top": 64,
+											"width": 195.787109375,
 											"height": 13,
-											"text": "(from Сервер приложения)"
+											"text": "(from Application server (Ubuntu))"
 										},
 										{
 											"_type": "LabelView",
@@ -2454,15 +2454,15 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 32,
-											"top": 160,
+											"left": 48,
+											"top": 64,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 968,
-									"top": 546,
+									"left": 976,
+									"top": 498,
 									"width": 175,
 									"height": 38,
 									"stereotypeLabel": {
@@ -2489,8 +2489,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -8,
-									"top": 88,
+									"top": 40,
 									"width": 10,
 									"height": 10
 								},
@@ -2505,8 +2504,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -8,
-									"top": 88,
+									"top": 40,
 									"width": 10,
 									"height": 10
 								},
@@ -2521,8 +2519,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -8,
-									"top": 88,
+									"top": 40,
 									"width": 10,
 									"height": 10
 								},
@@ -2537,16 +2534,15 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -8,
-									"top": 88,
+									"top": 40,
 									"width": 10,
 									"height": 10
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 968,
-							"top": 536,
+							"left": 976,
+							"top": 488,
 							"width": 185,
 							"height": 113,
 							"nameCompartment": {
@@ -2595,8 +2591,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 32,
-											"top": 128,
+											"left": 48,
+											"top": 32,
 											"height": 13
 										},
 										{
@@ -2606,8 +2602,8 @@
 												"$ref": "AAAAAAGHNK4J8CHCQno="
 											},
 											"font": "Arial;13;1",
-											"left": 1009,
-											"top": 591,
+											"left": 1017,
+											"top": 543,
 											"width": 112.0234375,
 											"height": 13,
 											"text": "Kafka-server:9092"
@@ -2620,11 +2616,11 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 32,
-											"top": 128,
-											"width": 81.5546875,
+											"left": 48,
+											"top": 32,
+											"width": 119.21533203125,
 											"height": 13,
-											"text": "(from Брокер)"
+											"text": "(from Apache Kafka)"
 										},
 										{
 											"_type": "LabelView",
@@ -2634,15 +2630,15 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 32,
-											"top": 128,
+											"left": 48,
+											"top": 32,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 1004,
-									"top": 584,
+									"left": 1012,
+									"top": 536,
 									"width": 122.0234375,
 									"height": 25,
 									"stereotypeLabel": {
@@ -2669,8 +2665,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 16,
-									"top": 64,
+									"left": 24,
+									"top": 16,
 									"width": 10,
 									"height": 10
 								},
@@ -2685,8 +2681,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 16,
-									"top": 64,
+									"left": 24,
+									"top": 16,
 									"width": 10,
 									"height": 10
 								},
@@ -2701,8 +2697,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 16,
-									"top": 64,
+									"left": 24,
+									"top": 16,
 									"width": 10,
 									"height": 10
 								},
@@ -2717,16 +2713,16 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 16,
-									"top": 64,
+									"left": 24,
+									"top": 16,
 									"width": 10,
 									"height": 10
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 984,
-							"top": 584,
+							"left": 992,
+							"top": 536,
 							"width": 142.0234375,
 							"height": 45,
 							"nameCompartment": {
@@ -2966,7 +2962,7 @@
 											"font": "Arial;13;0",
 											"left": 589,
 											"top": 519,
-											"width": 277,
+											"width": 317,
 											"height": 13,
 											"text": "«Execution Enviroment»"
 										},
@@ -2979,7 +2975,7 @@
 											"font": "Arial;13;1",
 											"left": 589,
 											"top": 534,
-											"width": 277,
+											"width": 317,
 											"height": 13,
 											"text": "GO"
 										},
@@ -2993,9 +2989,9 @@
 											"font": "Arial;13;0",
 											"left": 415,
 											"top": 477,
-											"width": 160.70361328125,
+											"width": 195.787109375,
 											"height": 13,
-											"text": "(from Сервер приложения)"
+											"text": "(from Application server (Ubuntu))"
 										},
 										{
 											"_type": "LabelView",
@@ -3014,7 +3010,7 @@
 									"font": "Arial;13;0",
 									"left": 584,
 									"top": 514,
-									"width": 287,
+									"width": 327,
 									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGHcYKV8+YvrQs="
@@ -3098,8 +3094,8 @@
 							"containerChangeable": true,
 							"left": 584,
 							"top": 504,
-							"width": 297,
-							"height": 177,
+							"width": 337,
+							"height": 121,
 							"nameCompartment": {
 								"$ref": "AAAAAAGHcYKV8+YuntA="
 							},
@@ -3138,12 +3134,12 @@
 										"$ref": "AAAAAAGHNLFQ/iaUcmo="
 									},
 									"font": "Arial;13;0",
-									"left": 905,
-									"top": 599,
+									"left": 934,
+									"top": 575,
 									"width": 33.591796875,
 									"height": 13,
-									"alpha": 2.252141841942355,
-									"distance": 16.1245154965971,
+									"alpha": 2.01796708863727,
+									"distance": 20.591260281974,
 									"hostEdge": {
 										"$ref": "AAAAAAGHcYVGmObODVE="
 									},
@@ -3161,8 +3157,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 909,
-									"top": 615,
+									"left": 941,
+									"top": 587,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -3182,8 +3178,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 913,
-									"top": 571,
+									"left": 939,
+									"top": 543,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -3201,7 +3197,7 @@
 								"$ref": "AAAAAAGHNK4J7yHBHHc="
 							},
 							"lineStyle": 1,
-							"points": "983:599;841:586",
+							"points": "991:562;890:567",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGHcYVGmObPcGI="
@@ -3333,11 +3329,12 @@
 											"_parent": {
 												"$ref": "AAAAAAGHcYVGl+bFuuA="
 											},
-											"visible": false,
 											"font": "Arial;13;0",
-											"left": -344,
-											"top": -56,
-											"height": 13
+											"left": 625,
+											"top": 557,
+											"width": 260.10791015625,
+											"height": 13,
+											"text": "«Producer<->Consumer»"
 										},
 										{
 											"_type": "LabelView",
@@ -3347,10 +3344,10 @@
 											},
 											"font": "Arial;13;1",
 											"left": 625,
-											"top": 559,
-											"width": 211,
+											"top": 572,
+											"width": 260.10791015625,
 											"height": 13,
-											"text": "Email Producer Service"
+											"text": "Emailing Service:443"
 										},
 										{
 											"_type": "LabelView",
@@ -3383,8 +3380,8 @@
 									"font": "Arial;13;0",
 									"left": 620,
 									"top": 552,
-									"width": 221,
-									"height": 25,
+									"width": 270.10791015625,
+									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGHcYVGl+bGEzQ="
 									},
@@ -3410,7 +3407,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -180,
-									"top": -36,
+									"top": -52,
 									"width": 10,
 									"height": 10
 								},
@@ -3426,7 +3423,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -180,
-									"top": -36,
+									"top": -52,
 									"width": 10,
 									"height": 10
 								},
@@ -3442,7 +3439,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -180,
-									"top": -36,
+									"top": -52,
 									"width": 10,
 									"height": 10
 								},
@@ -3458,7 +3455,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -180,
-									"top": -36,
+									"top": -52,
 									"width": 10,
 									"height": 10
 								}
@@ -3467,7 +3464,7 @@
 							"containerChangeable": true,
 							"left": 600,
 							"top": 552,
-							"width": 241,
+							"width": 290.10791015625,
 							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGHcYVGl+bFuuA="
@@ -3685,282 +3682,6 @@
 							"templateParameterCompartment": {
 								"$ref": "AAAAAAGE5tvPgTMaoOw="
 							}
-						},
-						{
-							"_type": "UMLComponentView",
-							"_id": "AAAAAAGHccNzzOmvgpQ=",
-							"_parent": {
-								"$ref": "AAAAAAGE5tvPhDNgkkI="
-							},
-							"model": {
-								"$ref": "AAAAAAGHccNtwemr+ss="
-							},
-							"subViews": [
-								{
-									"_type": "UMLNameCompartmentView",
-									"_id": "AAAAAAGHccNzzemwdAM=",
-									"_parent": {
-										"$ref": "AAAAAAGHccNzzOmvgpQ="
-									},
-									"model": {
-										"$ref": "AAAAAAGHccNtwemr+ss="
-									},
-									"subViews": [
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGHccNzzemxKdM=",
-											"_parent": {
-												"$ref": "AAAAAAGHccNzzemwdAM="
-											},
-											"font": "Arial;13;0",
-											"left": 625,
-											"top": 621,
-											"width": 211,
-											"height": 13,
-											"text": "«Consumer»"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGHccNzzemyE1Y=",
-											"_parent": {
-												"$ref": "AAAAAAGHccNzzemwdAM="
-											},
-											"font": "Arial;13;1",
-											"left": 625,
-											"top": 636,
-											"width": 211,
-											"height": 13,
-											"text": "Email sending daemon"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGHccNzzemzGN4=",
-											"_parent": {
-												"$ref": "AAAAAAGHccNzzemwdAM="
-											},
-											"visible": false,
-											"font": "Arial;13;0",
-											"left": 337,
-											"top": 526,
-											"width": 79.44091796875,
-											"height": 13,
-											"text": "(from GO)"
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAGHccNzzem0zyM=",
-											"_parent": {
-												"$ref": "AAAAAAGHccNzzemwdAM="
-											},
-											"visible": false,
-											"font": "Arial;13;0",
-											"left": -772,
-											"top": -274,
-											"height": 13,
-											"horizontalAlignment": 1
-										}
-									],
-									"font": "Arial;13;0",
-									"left": 620,
-									"top": 616,
-									"width": 221,
-									"height": 38,
-									"stereotypeLabel": {
-										"$ref": "AAAAAAGHccNzzemxKdM="
-									},
-									"nameLabel": {
-										"$ref": "AAAAAAGHccNzzemyE1Y="
-									},
-									"namespaceLabel": {
-										"$ref": "AAAAAAGHccNzzemzGN4="
-									},
-									"propertyLabel": {
-										"$ref": "AAAAAAGHccNzzem0zyM="
-									}
-								},
-								{
-									"_type": "UMLAttributeCompartmentView",
-									"_id": "AAAAAAGHccNzzem1Imc=",
-									"_parent": {
-										"$ref": "AAAAAAGHccNzzOmvgpQ="
-									},
-									"model": {
-										"$ref": "AAAAAAGHccNtwemr+ss="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": -386,
-									"top": -137,
-									"width": 10,
-									"height": 10
-								},
-								{
-									"_type": "UMLOperationCompartmentView",
-									"_id": "AAAAAAGHccNzzem29EQ=",
-									"_parent": {
-										"$ref": "AAAAAAGHccNzzOmvgpQ="
-									},
-									"model": {
-										"$ref": "AAAAAAGHccNtwemr+ss="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": -386,
-									"top": -137,
-									"width": 10,
-									"height": 10
-								},
-								{
-									"_type": "UMLReceptionCompartmentView",
-									"_id": "AAAAAAGHccNzzem3OhQ=",
-									"_parent": {
-										"$ref": "AAAAAAGHccNzzOmvgpQ="
-									},
-									"model": {
-										"$ref": "AAAAAAGHccNtwemr+ss="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": -386,
-									"top": -137,
-									"width": 10,
-									"height": 10
-								},
-								{
-									"_type": "UMLTemplateParameterCompartmentView",
-									"_id": "AAAAAAGHccNzzem456w=",
-									"_parent": {
-										"$ref": "AAAAAAGHccNzzOmvgpQ="
-									},
-									"model": {
-										"$ref": "AAAAAAGHccNtwemr+ss="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": -386,
-									"top": -137,
-									"width": 10,
-									"height": 10
-								}
-							],
-							"font": "Arial;13;0",
-							"containerChangeable": true,
-							"left": 600,
-							"top": 616,
-							"width": 241,
-							"height": 45,
-							"nameCompartment": {
-								"$ref": "AAAAAAGHccNzzemwdAM="
-							},
-							"suppressAttributes": true,
-							"suppressOperations": true,
-							"attributeCompartment": {
-								"$ref": "AAAAAAGHccNzzem1Imc="
-							},
-							"operationCompartment": {
-								"$ref": "AAAAAAGHccNzzem29EQ="
-							},
-							"receptionCompartment": {
-								"$ref": "AAAAAAGHccNzzem3OhQ="
-							},
-							"templateParameterCompartment": {
-								"$ref": "AAAAAAGHccNzzem456w="
-							}
-						},
-						{
-							"_type": "UMLDependencyView",
-							"_id": "AAAAAAGHccX2UOn6wPI=",
-							"_parent": {
-								"$ref": "AAAAAAGE5tvPhDNgkkI="
-							},
-							"model": {
-								"$ref": "AAAAAAGHccX2T+n4Wlo="
-							},
-							"subViews": [
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAGHccX2UOn7920=",
-									"_parent": {
-										"$ref": "AAAAAAGHccX2UOn6wPI="
-									},
-									"model": {
-										"$ref": "AAAAAAGHccX2T+n4Wlo="
-									},
-									"font": "Arial;13;0",
-									"left": 897,
-									"top": 627,
-									"width": 33.591796875,
-									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 15,
-									"hostEdge": {
-										"$ref": "AAAAAAGHccX2UOn6wPI="
-									},
-									"edgePosition": 1,
-									"text": "+TCP"
-								},
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAGHccX2UOn89aQ=",
-									"_parent": {
-										"$ref": "AAAAAAGHccX2UOn6wPI="
-									},
-									"model": {
-										"$ref": "AAAAAAGHccX2T+n4Wlo="
-									},
-									"visible": null,
-									"font": "Arial;13;0",
-									"left": 914,
-									"top": 642,
-									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
-									"hostEdge": {
-										"$ref": "AAAAAAGHccX2UOn6wPI="
-									},
-									"edgePosition": 1
-								},
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAGHccX2UOn9g5o=",
-									"_parent": {
-										"$ref": "AAAAAAGHccX2UOn6wPI="
-									},
-									"model": {
-										"$ref": "AAAAAAGHccX2T+n4Wlo="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": 910,
-									"top": 598,
-									"height": 13,
-									"alpha": -1.5707963267948966,
-									"distance": 15,
-									"hostEdge": {
-										"$ref": "AAAAAAGHccX2UOn6wPI="
-									},
-									"edgePosition": 1
-								}
-							],
-							"font": "Arial;13;0",
-							"head": {
-								"$ref": "AAAAAAGHccNzzOmvgpQ="
-							},
-							"tail": {
-								"$ref": "AAAAAAGHNK4J7yHBHHc="
-							},
-							"lineStyle": 1,
-							"points": "983:613;841:626",
-							"showVisibility": true,
-							"nameLabel": {
-								"$ref": "AAAAAAGHccX2UOn7920="
-							},
-							"stereotypeLabel": {
-								"$ref": "AAAAAAGHccX2UOn89aQ="
-							},
-							"propertyLabel": {
-								"$ref": "AAAAAAGHccX2UOn9g5o="
-							}
 						}
 					]
 				},
@@ -4042,7 +3763,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGE5tvPhDN0VSc="
 					},
-					"name": "Сервер приложения",
+					"name": "Application server (Ubuntu)",
 					"ownedElements": [
 						{
 							"_type": "UMLNode",
@@ -4113,7 +3834,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGE5tvPhDNuHg4="
 							},
-							"name": "Брокер",
+							"name": "Apache Kafka",
 							"ownedElements": [
 								{
 									"_type": "UMLDependency",
@@ -4222,7 +3943,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGHcYKLX+YpIdw="
 									},
-									"name": "Email Producer Service",
+									"name": "Emailing Service:443",
 									"ownedElements": [
 										{
 											"_type": "UMLComponentRealization",
@@ -4237,7 +3958,8 @@
 												"$ref": "AAAAAAGE5tvPhDNmdVA="
 											}
 										}
-									]
+									],
+									"stereotype": "Producer<->Consumer"
 								},
 								{
 									"_type": "UMLClass",
