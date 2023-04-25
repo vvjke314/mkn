@@ -4,6 +4,7 @@
 
 - [репозиторий фронтенда](https://github.com/pvrtss/mkn-frontend)
 - [репозиторий бэкенда](https://github.com/vvjke314/mkn-backend)
+- [репозиторий микросервиса уведомлений](https://github.com/Sanyazay/mkn-mailing-service)
 
 ### Figma
 
@@ -12,6 +13,7 @@
 ### Документация:
 
 - Swagger: [посмотреть(preview)](https://vvjke314.github.io/mkn/) // [json-файл](https://github.com/vvjke314/mkn/tree/main/docs/swagger/swagger.json)
+- Protobuf-contract: [proto-файл](/docs/proto/mail-service.proto)
 - Техническое задание - [pdf](https://github.com/vvjke314/mkn/tree/main/docs/tech-spec/TZ_Zaycev_Eremihin_Abramov.pdf) [docx](https://github.com/vvjke314/mkn/tree/main/docs/tech-spec/TZ_Zaycev_Eremihin_Abramov.docx)
 
 ### Диаграммы

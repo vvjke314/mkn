@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+message ScheduleRequest {
+    int32 notification_id = 1;
+    string project_title = 2;
+    string section_title = 3;
+    string notification_title = 4;
+    string description = 5;
+    string deadline = 6;
+    string email = 7;
+}
+message ScheduleResponse {
+    int32 send_status = 1;
+}
+
+service MailingService {
+    rpc ScheduleNotification (ScheduleRequest) returns (ScheduleResponse);
+}
