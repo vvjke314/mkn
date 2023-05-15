@@ -1,18 +1,54 @@
 syntax = "proto3";
 
-message ScheduleRequest {
+message ScheduleRequest { 
+    int32 notification_id = 1;
+    string deadline = 2;
+    
+}
+message ScheduleResponse {
+    int32 add_status = 1;
+}
+
+
+
+message NotificationInfoRequest {
+    int32 notification_id = 1;
+}
+
+message NotificationInfoResponse {
     int32 notification_id = 1;
     string project_title = 2;
     string section_title = 3;
     string notification_title = 4;
     string description = 5;
-    string deadline = 6;
-    string email = 7;
+    repeated string email = 6;
 }
-message ScheduleResponse {
+
+message UpdateNotificationStatusRequest {
+    int32 notification_id = 1;
+    int32 send_status = 2;
+}
+
+message UpdateNotificationStatusResponse {
+    int32 send_status = 1;
+}
+
+message CancelNotificationRequest {
+    int32 notification_id = 1;
+}
+
+message CancelNotificationResponse {
     int32 send_status = 1;
 }
 
 service MailingService {
+    
     rpc ScheduleNotification (ScheduleRequest) returns (ScheduleResponse);
+    rpc CancelNotification (CancelNotificationRequest) returns (CancelNotificationResponse);
+    
+}
+
+service BackendService {
+    rpc GetFullNotificationInfo (NotificationInfoRequest) returns (NotificationInfoResponse);
+    rpc UpdateNotificationStatus (UpdateNotificationStatusRequest) returns (UpdateNotificationStatusResponse);
 }
