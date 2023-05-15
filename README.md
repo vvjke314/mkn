@@ -34,4 +34,4 @@
 
 [Файл](/docs/diagrams/deploy.mdj)
 
-![Диаграмма развертывания](/docs/diagrams/deploy.png)
+![Диаграмма развертывания](/docs/diagrams/deployment.png)
