@@ -1568,7 +1568,7 @@ const docTemplate = `{
         "ds.ResendNotificationRequest": {
             "type": "object",
             "properties": {
-                "title": {
+                "deadline": {
                     "type": "string"
                 }
             }

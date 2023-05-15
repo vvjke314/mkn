@@ -114,7 +114,7 @@ definitions:
     type: object
   ds.ResendNotificationRequest:
     properties:
-      title:
+      deadline:
         type: string
     type: object
   ds.Section:
