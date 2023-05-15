@@ -31,7 +31,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "change"
+                    "user"
                 ],
                 "summary": "Changes user email",
                 "parameters": [
@@ -79,7 +79,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "add"
+                    "favorite_project"
                 ],
                 "summary": "Add favorite project",
                 "parameters": [
@@ -128,7 +128,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "favorite_project"
                 ],
                 "summary": "Gets favorite projects",
                 "parameters": [
@@ -172,7 +172,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "delete"
+                    "favorite_project"
                 ],
                 "summary": "Delete favorite project",
                 "parameters": [
@@ -221,7 +221,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "favorite_project"
                 ],
                 "summary": "Gets favorite projects",
                 "responses": {
@@ -335,7 +335,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "add"
+                    "project"
                 ],
                 "summary": "Creates project",
                 "parameters": [
@@ -389,7 +389,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "change"
+                    "notification"
                 ],
                 "summary": "Resend notification",
                 "parameters": [
@@ -448,7 +448,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "notification"
                 ],
                 "summary": "Gets Notification",
                 "parameters": [
@@ -493,7 +493,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "change"
+                    "notification"
                 ],
                 "summary": "Update notifications",
                 "parameters": [
@@ -541,7 +541,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "delete"
+                    "notification"
                 ],
                 "summary": "Delete notifications",
                 "parameters": [
@@ -596,7 +596,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "change"
+                    "section"
                 ],
                 "summary": "Updates section",
                 "parameters": [
@@ -658,7 +658,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "delete"
+                    "section"
                 ],
                 "summary": "Deletes section",
                 "parameters": [
@@ -703,12 +703,17 @@ const docTemplate = `{
         },
         "/project/section/{section_id}/notification": {
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Creates notification in accordance with the entered parameters",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "add"
+                    "notification"
                 ],
                 "summary": "Creates notification",
                 "parameters": [
@@ -718,6 +723,15 @@ const docTemplate = `{
                         "name": "section_id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Notification information",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ds.CreateNotificationRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -752,7 +766,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "notification"
                 ],
                 "summary": "Gets All Notifications",
                 "parameters": [
@@ -801,7 +815,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "change"
+                    "project"
                 ],
                 "summary": "Update project",
                 "parameters": [
@@ -863,7 +877,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "delete"
+                    "project"
                 ],
                 "summary": "Deletes project",
                 "parameters": [
@@ -918,7 +932,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "add"
+                    "collaborations"
                 ],
                 "summary": "Adds collaborators",
                 "parameters": [
@@ -972,7 +986,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "delete"
+                    "collaborations"
                 ],
                 "summary": "Deletes collaborator",
                 "parameters": [
@@ -1028,7 +1042,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "collaborations"
                 ],
                 "summary": "Returns collaborators",
                 "parameters": [
@@ -1077,7 +1091,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "add"
+                    "section"
                 ],
                 "summary": "Creates section",
                 "parameters": [
@@ -1135,7 +1149,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "section"
                 ],
                 "summary": "Returns all sections",
                 "parameters": [
@@ -1179,7 +1193,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "project"
                 ],
                 "summary": "Gets all projects",
                 "responses": {
@@ -1214,14 +1228,14 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Returns the last three projects by last edit time",
+                "description": "Returns the last six projects by last edit time",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "project"
                 ],
-                "summary": "Returns last 3 projects",
+                "summary": "Returns last 6 projects",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1259,7 +1273,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "project"
                 ],
                 "summary": "Gets all owned project",
                 "responses": {
@@ -1331,7 +1345,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "notification"
                 ],
                 "summary": "Gets undelivired notifications",
                 "responses": {
@@ -1366,7 +1380,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "notification"
                 ],
                 "summary": "Gets upcoming notifications",
                 "responses": {
@@ -1459,6 +1473,23 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "ds.CreateNotificationRequest": {
+            "type": "object",
+            "properties": {
+                "deadline": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "title": {
                     "type": "string"
                 }
             }

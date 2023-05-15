@@ -44,6 +44,17 @@ definitions:
       user_id:
         type: string
     type: object
+  ds.CreateNotificationRequest:
+    properties:
+      deadline:
+        type: string
+      description:
+        type: string
+      status:
+        type: string
+      title:
+        type: string
+    type: object
   ds.CreateProjectRequest:
     properties:
       color:
@@ -195,7 +206,7 @@ paths:
       - BearerAuth: []
       summary: Changes user email
       tags:
-      - change
+      - user
   /favorite:
     post:
       description: Add favorite project
@@ -226,7 +237,7 @@ paths:
       - BearerAuth: []
       summary: Add favorite project
       tags:
-      - add
+      - favorite_project
   /favorite/{project_id}:
     delete:
       description: Delete favorite user project
@@ -257,7 +268,7 @@ paths:
       - BearerAuth: []
       summary: Delete favorite project
       tags:
-      - delete
+      - favorite_project
     get:
       description: Returns favorite projects
       parameters:
@@ -285,7 +296,7 @@ paths:
       - BearerAuth: []
       summary: Gets favorite projects
       tags:
-      - info
+      - favorite_project
   /favorites:
     get:
       description: Returns favorite projects
@@ -310,7 +321,7 @@ paths:
       - BearerAuth: []
       summary: Gets favorite projects
       tags:
-      - info
+      - favorite_project
   /login:
     post:
       description: Login user
@@ -391,7 +402,7 @@ paths:
       - BearerAuth: []
       summary: Creates project
       tags:
-      - add
+      - project
   /project/{project_id}:
     delete:
       description: Deletes a specific project and returns all owned projects
@@ -426,7 +437,7 @@ paths:
       - BearerAuth: []
       summary: Deletes project
       tags:
-      - delete
+      - project
     put:
       description: Updates a specific project according to the entered parameters
         and returns all owned projects
@@ -467,7 +478,7 @@ paths:
       - BearerAuth: []
       summary: Update project
       tags:
-      - change
+      - project
   /project/{project_id}/collaborator:
     delete:
       description: Removes a collaborator from the current project and returns all
@@ -504,7 +515,7 @@ paths:
       - BearerAuth: []
       summary: Deletes collaborator
       tags:
-      - delete
+      - collaborations
     post:
       description: Adds a collaborator to the current project and returns all collaborators
         of this project
@@ -540,7 +551,7 @@ paths:
       - BearerAuth: []
       summary: Adds collaborators
       tags:
-      - add
+      - collaborations
   /project/{project_id}/collaborators:
     get:
       description: Returns all collaborators of the project
@@ -571,7 +582,7 @@ paths:
       - BearerAuth: []
       summary: Returns collaborators
       tags:
-      - info
+      - collaborations
   /project/{project_id}/section:
     post:
       description: Creates a section in the project
@@ -608,7 +619,7 @@ paths:
       - BearerAuth: []
       summary: Creates section
       tags:
-      - add
+      - section
   /project/{project_id}/sections:
     get:
       description: Returns all sections of the current project
@@ -639,7 +650,7 @@ paths:
       - BearerAuth: []
       summary: Returns all sections
       tags:
-      - info
+      - section
   /project/section/{section_id}:
     delete:
       description: Deletes section from current project
@@ -674,7 +685,7 @@ paths:
       - BearerAuth: []
       summary: Deletes section
       tags:
-      - delete
+      - section
     put:
       description: Updates a section in the current project
       parameters:
@@ -714,7 +725,7 @@ paths:
       - BearerAuth: []
       summary: Updates section
       tags:
-      - change
+      - section
   /project/section/{section_id}/notification:
     post:
       description: Creates notification in accordance with the entered parameters
@@ -724,6 +735,12 @@ paths:
         name: section_id
         required: true
         type: string
+      - description: Notification information
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/ds.CreateNotificationRequest'
       produces:
       - application/json
       responses:
@@ -741,9 +758,11 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Creates notification
       tags:
-      - add
+      - notification
   /project/section/{section_id}/notifications:
     get:
       description: Returns all notifications in the current section
@@ -772,7 +791,7 @@ paths:
             $ref: '#/definitions/app.errorResponse'
       summary: Gets All Notifications
       tags:
-      - info
+      - notification
   /project/section/notification/{notification_id}:
     delete:
       description: Update information about a specific notification
@@ -805,7 +824,7 @@ paths:
             $ref: '#/definitions/app.errorResponse'
       summary: Delete notifications
       tags:
-      - delete
+      - notification
     get:
       description: Returns Notification by ID
       parameters:
@@ -835,7 +854,7 @@ paths:
             $ref: '#/definitions/app.errorResponse'
       summary: Gets Notification
       tags:
-      - info
+      - notification
     put:
       description: Update information about a specific notification according to the
         entered parameters
@@ -868,7 +887,7 @@ paths:
             $ref: '#/definitions/app.errorResponse'
       summary: Update notifications
       tags:
-      - change
+      - notification
   /project/section/notification/resend/{notification_id}:
     put:
       description: Resend notification
@@ -909,7 +928,7 @@ paths:
       - BearerAuth: []
       summary: Resend notification
       tags:
-      - change
+      - notification
   /projects:
     get:
       description: Returns all projects
@@ -932,10 +951,10 @@ paths:
             $ref: '#/definitions/app.errorResponse'
       summary: Gets all projects
       tags:
-      - info
+      - project
   /projects/latest:
     get:
-      description: Returns the last three projects by last edit time
+      description: Returns the last six projects by last edit time
       produces:
       - application/json
       responses:
@@ -955,9 +974,9 @@ paths:
             $ref: '#/definitions/app.errorResponse'
       security:
       - BearerAuth: []
-      summary: Returns last 3 projects
+      summary: Returns last 6 projects
       tags:
-      - info
+      - project
   /projects/owned:
     get:
       description: Gets all owned project
@@ -982,7 +1001,7 @@ paths:
       - BearerAuth: []
       summary: Gets all owned project
       tags:
-      - info
+      - project
   /signup:
     post:
       description: Signup user
@@ -1029,7 +1048,7 @@ paths:
             $ref: '#/definitions/app.errorResponse'
       summary: Gets undelivired notifications
       tags:
-      - info
+      - notification
   /upcoming:
     get:
       description: Returns upcoming notifications
@@ -1052,7 +1071,7 @@ paths:
             $ref: '#/definitions/app.errorResponse'
       summary: Gets upcoming notifications
       tags:
-      - info
+      - notification
 securityDefinitions:
   BearerAuth:
     in: header
