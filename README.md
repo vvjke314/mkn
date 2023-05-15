@@ -35,3 +35,5 @@
 [Файл](/docs/diagrams/deploy.mdj)
 
 ![Диаграмма развертывания](/docs/diagrams/deployment.png)
+
+![Activity-диаграмма](/docs/diagrams/Activity diagram.png)
