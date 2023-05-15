@@ -1,5 +1,40 @@
 basePath: /
 definitions:
+  app.LoginReqBody:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  app.SignUpReqBody:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - password
+    - username
+    type: object
+  app.errorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  ds.ChangeEmailRequest:
+    properties:
+      email:
+        type: string
+    required:
+    - email
+    type: object
   ds.Collaboration:
     properties:
       id:
@@ -8,6 +43,29 @@ definitions:
         type: string
       user_id:
         type: string
+    type: object
+  ds.CreateProjectRequest:
+    properties:
+      color:
+        type: string
+      description:
+        type: string
+      title:
+        type: string
+    required:
+    - color
+    - description
+    - title
+    type: object
+  ds.CreateSectionRequest:
+    properties:
+      color:
+        type: string
+      title:
+        type: string
+    required:
+    - color
+    - title
     type: object
   ds.FavoriteProject:
     properties:
@@ -49,6 +107,15 @@ definitions:
         type: string
       title:
         type: string
+    required:
+    - color
+    - description
+    - title
+    type: object
+  ds.ResendNotificationRequest:
+    properties:
+      title:
+        type: string
     type: object
   ds.Section:
     properties:
@@ -61,6 +128,22 @@ definitions:
       title:
         type: string
     type: object
+  ds.UpdateProjectRequest:
+    properties:
+      color:
+        type: string
+      description:
+        type: string
+      title:
+        type: string
+    type: object
+  ds.UpdateSectionRequest:
+    properties:
+      color:
+        type: string
+      title:
+        type: string
+    type: object
   ds.User:
     properties:
       email:
@@ -68,13 +151,10 @@ definitions:
       id:
         type: string
       is_manager:
-        type: boolean
-      username:
+        type: integer
+      password:
         type: string
-    type: object
-  internal_app.errorResponse:
-    properties:
-      message:
+      username:
         type: string
     type: object
 host: 127.0.0.1:8080
@@ -89,23 +169,30 @@ paths:
   /email:
     put:
       description: Changes user email
+      parameters:
+      - description: New user email
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/ds.ChangeEmailRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            items:
-              $ref: '#/definitions/ds.FavoriteProject'
-            type: array
+            $ref: '#/definitions/ds.User'
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Changes user email
       tags:
       - change
@@ -130,11 +217,13 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Add favorite project
       tags:
       - add
@@ -159,38 +248,16 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Delete favorite project
       tags:
       - delete
-  /favorites:
-    get:
-      description: Returns favorite projects
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/ds.FavoriteProject'
-            type: array
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/internal_app.errorResponse'
-      summary: Gets favorite projects
-      tags:
-      - info
-  /favorites/{project_id}:
     get:
       description: Returns favorite projects
       parameters:
@@ -205,21 +272,55 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/ds.FavoriteProject'
+            $ref: '#/definitions/ds.Project'
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
+      summary: Gets favorite projects
+      tags:
+      - info
+  /favorites:
+    get:
+      description: Returns favorite projects
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.Project'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Gets favorite projects
       tags:
       - info
   /login:
     post:
       description: Login user
+      parameters:
+      - description: User data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/app.LoginReqBody'
       produces:
       - application/json
       responses:
@@ -230,7 +331,7 @@ paths:
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
       summary: Login user
       tags:
       - auth
@@ -247,44 +348,53 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Logout user
       tags:
       - auth
   /project:
     post:
       description: Creates project
+      parameters:
+      - description: Project data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/ds.CreateProjectRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            items:
-              $ref: '#/definitions/ds.Project'
-            type: array
+            $ref: '#/definitions/ds.Project'
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Creates project
       tags:
       - add
   /project/{project_id}:
     delete:
-      description: Deletes a specific project
+      description: Deletes a specific project and returns all owned projects
       parameters:
       - description: Project ID
         in: path
@@ -303,26 +413,35 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Deletes project
       tags:
       - delete
     put:
       description: Updates a specific project according to the entered parameters
+        and returns all owned projects
       parameters:
       - description: Project ID
         in: path
         name: project_id
         required: true
         type: string
+      - description: New project information
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/ds.UpdateProjectRequest'
       produces:
       - application/json
       responses:
@@ -335,22 +454,30 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Update project
       tags:
       - change
   /project/{project_id}/collaborator:
     delete:
-      description: Removes a collaborator from the current project
+      description: Removes a collaborator from the current project and returns all
+        collaborators of this project
       parameters:
+      - description: Collaborator ID
+        in: query
+        name: collaborator_id
+        required: true
+        type: string
       - description: Project ID
         in: path
         name: project_id
@@ -368,17 +495,25 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Deletes collaborator
       tags:
       - delete
     post:
-      description: Adds a collaborator to the current project
+      description: Adds a collaborator to the current project and returns all collaborators
+        of this project
       parameters:
+      - description: Collaborator ID
+        in: query
+        name: collaborator_id
+        required: true
+        type: string
       - description: Project ID
         in: path
         name: project_id
@@ -391,16 +526,18 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ds.Collaboration'
+              $ref: '#/definitions/ds.User'
             type: array
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Adds collaborators
       tags:
       - add
@@ -420,16 +557,18 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ds.Collaboration'
+              $ref: '#/definitions/ds.User'
             type: array
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Returns collaborators
       tags:
       - info
@@ -442,6 +581,12 @@ paths:
         name: project_id
         required: true
         type: string
+      - description: Section information
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/ds.CreateSectionRequest'
       produces:
       - application/json
       responses:
@@ -454,11 +599,13 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Creates section
       tags:
       - add
@@ -483,11 +630,13 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Returns all sections
       tags:
       - info
@@ -512,21 +661,29 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Deletes section
       tags:
       - delete
     put:
       description: Updates a section in the current project
       parameters:
+      - description: Section information
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/ds.UpdateSectionRequest'
       - description: Section ID
         in: path
         name: section_id
@@ -544,15 +701,17 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Updates section
       tags:
       - change
@@ -577,11 +736,11 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
       summary: Creates notification
       tags:
       - add
@@ -606,11 +765,11 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
       summary: Gets All Notifications
       tags:
       - info
@@ -635,15 +794,15 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
       summary: Delete notifications
       tags:
       - delete
@@ -665,15 +824,15 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
       summary: Gets Notification
       tags:
       - info
@@ -698,16 +857,57 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
       summary: Update notifications
+      tags:
+      - change
+  /project/section/notification/resend/{notification_id}:
+    put:
+      description: Resend notification
+      parameters:
+      - description: Section information
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/ds.ResendNotificationRequest'
+      - description: Notification ID
+        in: path
+        name: notification_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ds.Notification'
+            type: array
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/app.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/app.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
+      summary: Resend notification
       tags:
       - change
   /projects:
@@ -725,11 +925,11 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
       summary: Gets all projects
       tags:
       - info
@@ -748,11 +948,13 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Returns last 3 projects
       tags:
       - info
@@ -771,17 +973,26 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Gets all owned project
       tags:
       - info
   /signup:
     post:
       description: Signup user
+      parameters:
+      - description: User data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/app.SignUpReqBody'
       produces:
       - application/json
       responses:
@@ -792,7 +1003,7 @@ paths:
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
       summary: Signup user
       tags:
       - auth
@@ -811,11 +1022,11 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
       summary: Gets undelivired notifications
       tags:
       - info
@@ -834,12 +1045,17 @@ paths:
         "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_app.errorResponse'
+            $ref: '#/definitions/app.errorResponse'
       summary: Gets upcoming notifications
       tags:
       - info
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"
