@@ -21,34 +21,47 @@ const docTemplate = `{
     "paths": {
         "/email": {
             "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Changes user email",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "change"
+                    "user"
                 ],
                 "summary": "Changes user email",
+                "parameters": [
+                    {
+                        "description": "New user email",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ds.ChangeEmailRequest"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ds.FavoriteProject"
-                            }
+                            "$ref": "#/definitions/ds.User"
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -56,12 +69,17 @@ const docTemplate = `{
         },
         "/favorite": {
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Add favorite project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "add"
+                    "favorite_project"
                 ],
                 "summary": "Add favorite project",
                 "parameters": [
@@ -86,26 +104,75 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
             }
         },
         "/favorite/{project_id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns favorite projects",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "favorite_project"
+                ],
+                "summary": "Gets favorite projects",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "project_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ds.Project"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/app.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/app.errorResponse"
+                        }
+                    }
+                }
+            },
             "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Delete favorite user project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "delete"
+                    "favorite_project"
                 ],
                 "summary": "Delete favorite project",
                 "parameters": [
@@ -130,13 +197,13 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -144,12 +211,17 @@ const docTemplate = `{
         },
         "/favorites": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Returns favorite projects",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "favorite_project"
                 ],
                 "summary": "Gets favorite projects",
                 "responses": {
@@ -158,61 +230,20 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ds.FavoriteProject"
+                                "$ref": "#/definitions/ds.Project"
                             }
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/favorites/{project_id}": {
-            "get": {
-                "description": "Returns favorite projects",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "info"
-                ],
-                "summary": "Gets favorite projects",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Project ID",
-                        "name": "project_id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ds.FavoriteProject"
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -228,6 +259,17 @@ const docTemplate = `{
                     "auth"
                 ],
                 "summary": "Login user",
+                "parameters": [
+                    {
+                        "description": "User data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/app.LoginReqBody"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -238,7 +280,7 @@ const docTemplate = `{
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -246,6 +288,11 @@ const docTemplate = `{
         },
         "/logout": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Logout user",
                 "produces": [
                     "application/json"
@@ -264,13 +311,13 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -278,40 +325,117 @@ const docTemplate = `{
         },
         "/project": {
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Creates project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "add"
+                    "project"
                 ],
                 "summary": "Creates project",
+                "parameters": [
+                    {
+                        "description": "Project data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ds.CreateProjectRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ds.Project"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/app.errorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/app.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/app.errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/project/section/notification/resend/{notification_id}": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Resend notification",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notification"
+                ],
+                "summary": "Resend notification",
+                "parameters": [
+                    {
+                        "description": "Section information",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ds.ResendNotificationRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Notification ID",
+                        "name": "notification_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ds.Project"
+                                "$ref": "#/definitions/ds.Notification"
                             }
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -324,7 +448,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "notification"
                 ],
                 "summary": "Gets Notification",
                 "parameters": [
@@ -346,19 +470,19 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -369,7 +493,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "change"
+                    "notification"
                 ],
                 "summary": "Update notifications",
                 "parameters": [
@@ -394,19 +518,19 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -417,7 +541,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "delete"
+                    "notification"
                 ],
                 "summary": "Delete notifications",
                 "parameters": [
@@ -442,19 +566,19 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -462,15 +586,29 @@ const docTemplate = `{
         },
         "/project/section/{section_id}": {
             "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Updates a section in the current project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "change"
+                    "section"
                 ],
                 "summary": "Updates section",
                 "parameters": [
+                    {
+                        "description": "Section information",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ds.UpdateSectionRequest"
+                        }
+                    },
                     {
                         "type": "string",
                         "description": "Section ID",
@@ -492,30 +630,35 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Deletes section from current project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "delete"
+                    "section"
                 ],
                 "summary": "Deletes section",
                 "parameters": [
@@ -540,19 +683,19 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -560,12 +703,17 @@ const docTemplate = `{
         },
         "/project/section/{section_id}/notification": {
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Creates notification in accordance with the entered parameters",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "add"
+                    "notification"
                 ],
                 "summary": "Creates notification",
                 "parameters": [
@@ -575,6 +723,15 @@ const docTemplate = `{
                         "name": "section_id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Notification information",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ds.CreateNotificationRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -590,13 +747,13 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -609,7 +766,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "notification"
                 ],
                 "summary": "Gets All Notifications",
                 "parameters": [
@@ -634,13 +791,13 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -648,12 +805,17 @@ const docTemplate = `{
         },
         "/project/{project_id}": {
             "put": {
-                "description": "Updates a specific project according to the entered parameters",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Updates a specific project according to the entered parameters and returns all owned projects",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "change"
+                    "project"
                 ],
                 "summary": "Update project",
                 "parameters": [
@@ -663,6 +825,15 @@ const docTemplate = `{
                         "name": "project_id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "New project information",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ds.UpdateProjectRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -678,30 +849,35 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
             },
             "delete": {
-                "description": "Deletes a specific project",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Deletes a specific project and returns all owned projects",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "delete"
+                    "project"
                 ],
                 "summary": "Deletes project",
                 "parameters": [
@@ -726,19 +902,19 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -746,17 +922,29 @@ const docTemplate = `{
         },
         "/project/{project_id}/collaborator": {
             "post": {
-                "description": "Adds a collaborator to the current project",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Adds a collaborator to the current project and returns all collaborators of this project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "add"
+                    "collaborations"
                 ],
                 "summary": "Adds collaborators",
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "Collaborator ID",
+                        "name": "collaborator_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "Project ID",
                         "name": "project_id",
                         "in": "path",
@@ -769,34 +957,46 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ds.Collaboration"
+                                "$ref": "#/definitions/ds.User"
                             }
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
             },
             "delete": {
-                "description": "Removes a collaborator from the current project",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Removes a collaborator from the current project and returns all collaborators of this project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "delete"
+                    "collaborations"
                 ],
                 "summary": "Deletes collaborator",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Collaborator ID",
+                        "name": "collaborator_id",
+                        "in": "query",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "Project ID",
@@ -818,13 +1018,13 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -832,12 +1032,17 @@ const docTemplate = `{
         },
         "/project/{project_id}/collaborators": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Returns all collaborators of the project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "collaborations"
                 ],
                 "summary": "Returns collaborators",
                 "parameters": [
@@ -855,20 +1060,20 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ds.Collaboration"
+                                "$ref": "#/definitions/ds.User"
                             }
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -876,12 +1081,17 @@ const docTemplate = `{
         },
         "/project/{project_id}/section": {
             "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Creates a section in the project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "add"
+                    "section"
                 ],
                 "summary": "Creates section",
                 "parameters": [
@@ -891,6 +1101,15 @@ const docTemplate = `{
                         "name": "project_id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Section information",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ds.CreateSectionRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -906,13 +1125,13 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -920,12 +1139,17 @@ const docTemplate = `{
         },
         "/project/{project_id}/sections": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Returns all sections of the current project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "section"
                 ],
                 "summary": "Returns all sections",
                 "parameters": [
@@ -950,13 +1174,13 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -969,7 +1193,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "project"
                 ],
                 "summary": "Gets all projects",
                 "responses": {
@@ -985,13 +1209,13 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -999,14 +1223,19 @@ const docTemplate = `{
         },
         "/projects/latest": {
             "get": {
-                "description": "Returns the last three projects by last edit time",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Returns the last six projects by last edit time",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "project"
                 ],
-                "summary": "Returns last 3 projects",
+                "summary": "Returns last 6 projects",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1020,13 +1249,13 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -1034,12 +1263,17 @@ const docTemplate = `{
         },
         "/projects/owned": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Gets all owned project",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "project"
                 ],
                 "summary": "Gets all owned project",
                 "responses": {
@@ -1055,13 +1289,13 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -1077,6 +1311,17 @@ const docTemplate = `{
                     "auth"
                 ],
                 "summary": "Signup user",
+                "parameters": [
+                    {
+                        "description": "User data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/app.SignUpReqBody"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1087,7 +1332,7 @@ const docTemplate = `{
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -1100,7 +1345,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "notification"
                 ],
                 "summary": "Gets undelivired notifications",
                 "responses": {
@@ -1116,13 +1361,13 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -1135,7 +1380,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "info"
+                    "notification"
                 ],
                 "summary": "Gets upcoming notifications",
                 "responses": {
@@ -1151,13 +1396,13 @@ const docTemplate = `{
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_app.errorResponse"
+                            "$ref": "#/definitions/app.errorResponse"
                         }
                     }
                 }
@@ -1165,6 +1410,59 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "app.LoginReqBody": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "app.SignUpReqBody": {
+            "type": "object",
+            "required": [
+                "email",
+                "password",
+                "username"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "app.errorResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "ds.ChangeEmailRequest": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
         "ds.Collaboration": {
             "type": "object",
             "properties": {
@@ -1175,6 +1473,57 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "ds.CreateNotificationRequest": {
+            "type": "object",
+            "properties": {
+                "deadline": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "ds.CreateProjectRequest": {
+            "type": "object",
+            "required": [
+                "color",
+                "description",
+                "title"
+            ],
+            "properties": {
+                "color": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "ds.CreateSectionRequest": {
+            "type": "object",
+            "required": [
+                "color",
+                "title"
+            ],
+            "properties": {
+                "color": {
+                    "type": "string"
+                },
+                "title": {
                     "type": "string"
                 }
             }
@@ -1221,6 +1570,11 @@ const docTemplate = `{
         },
         "ds.Project": {
             "type": "object",
+            "required": [
+                "color",
+                "description",
+                "title"
+            ],
             "properties": {
                 "color": {
                     "type": "string"
@@ -1242,6 +1596,14 @@ const docTemplate = `{
                 }
             }
         },
+        "ds.ResendNotificationRequest": {
+            "type": "object",
+            "properties": {
+                "deadline": {
+                    "type": "string"
+                }
+            }
+        },
         "ds.Section": {
             "type": "object",
             "properties": {
@@ -1259,6 +1621,31 @@ const docTemplate = `{
                 }
             }
         },
+        "ds.UpdateProjectRequest": {
+            "type": "object",
+            "properties": {
+                "color": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "ds.UpdateSectionRequest": {
+            "type": "object",
+            "properties": {
+                "color": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
         "ds.User": {
             "type": "object",
             "properties": {
@@ -1269,20 +1656,22 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "is_manager": {
-                    "type": "boolean"
+                    "type": "integer"
+                },
+                "password": {
+                    "type": "string"
                 },
                 "username": {
                     "type": "string"
                 }
             }
-        },
-        "internal_app.errorResponse": {
-            "type": "object",
-            "properties": {
-                "message": {
-                    "type": "string"
-                }
-            }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }`
