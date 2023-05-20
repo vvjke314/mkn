@@ -117,50 +117,6 @@ const docTemplate = `{
             }
         },
         "/favorite/{project_id}": {
-            "get": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Returns favorite projects",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "favorite_project"
-                ],
-                "summary": "Gets favorite projects",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Project ID",
-                        "name": "project_id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ds.Project"
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "schema": {
-                            "$ref": "#/definitions/app.errorResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/app.errorResponse"
-                        }
-                    }
-                }
-            },
             "delete": {
                 "security": [
                     {
@@ -394,7 +350,7 @@ const docTemplate = `{
                 "summary": "Resend notification",
                 "parameters": [
                     {
-                        "description": "Section information",
+                        "description": "Deadline info",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -443,6 +399,11 @@ const docTemplate = `{
         },
         "/project/section/notification/{notification_id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Returns Notification by ID",
                 "produces": [
                     "application/json"
@@ -488,6 +449,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Update information about a specific notification according to the entered parameters",
                 "produces": [
                     "application/json"
@@ -503,6 +469,15 @@ const docTemplate = `{
                         "name": "notification_id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Notification information",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ds.UpdateNotificationRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -536,6 +511,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Update information about a specific notification",
                 "produces": [
                     "application/json"
@@ -761,6 +741,11 @@ const docTemplate = `{
         },
         "/project/section/{section_id}/notifications": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Returns all notifications in the current section",
                 "produces": [
                     "application/json"
@@ -1375,6 +1360,11 @@ const docTemplate = `{
         },
         "/upcoming": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "description": "Returns upcoming notifications",
                 "produces": [
                     "application/json"
@@ -1479,14 +1469,16 @@ const docTemplate = `{
         },
         "ds.CreateNotificationRequest": {
             "type": "object",
+            "required": [
+                "deadline",
+                "description",
+                "title"
+            ],
             "properties": {
                 "deadline": {
                     "type": "string"
                 },
                 "description": {
-                    "type": "string"
-                },
-                "status": {
                     "type": "string"
                 },
                 "title": {
@@ -1614,6 +1606,23 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "project_id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "ds.UpdateNotificationRequest": {
+            "type": "object",
+            "properties": {
+                "deadline": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "status": {
                     "type": "string"
                 },
                 "title": {

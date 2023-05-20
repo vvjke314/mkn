@@ -50,10 +50,12 @@ definitions:
         type: string
       description:
         type: string
-      status:
-        type: string
       title:
         type: string
+    required:
+    - deadline
+    - description
+    - title
     type: object
   ds.CreateProjectRequest:
     properties:
@@ -135,6 +137,17 @@ definitions:
       id:
         type: string
       project_id:
+        type: string
+      title:
+        type: string
+    type: object
+  ds.UpdateNotificationRequest:
+    properties:
+      deadline:
+        type: string
+      description:
+        type: string
+      status:
         type: string
       title:
         type: string
@@ -267,34 +280,6 @@ paths:
       security:
       - BearerAuth: []
       summary: Delete favorite project
-      tags:
-      - favorite_project
-    get:
-      description: Returns favorite projects
-      parameters:
-      - description: Project ID
-        in: path
-        name: project_id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/ds.Project'
-        "403":
-          description: Forbidden
-          schema:
-            $ref: '#/definitions/app.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/app.errorResponse'
-      security:
-      - BearerAuth: []
-      summary: Gets favorite projects
       tags:
       - favorite_project
   /favorites:
@@ -789,6 +774,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Gets All Notifications
       tags:
       - notification
@@ -822,6 +809,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Delete notifications
       tags:
       - notification
@@ -852,6 +841,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Gets Notification
       tags:
       - notification
@@ -864,6 +855,12 @@ paths:
         name: notification_id
         required: true
         type: string
+      - description: Notification information
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/ds.UpdateNotificationRequest'
       produces:
       - application/json
       responses:
@@ -885,6 +882,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Update notifications
       tags:
       - notification
@@ -892,7 +891,7 @@ paths:
     put:
       description: Resend notification
       parameters:
-      - description: Section information
+      - description: Deadline info
         in: body
         name: data
         required: true
@@ -1069,6 +1068,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Gets upcoming notifications
       tags:
       - notification
