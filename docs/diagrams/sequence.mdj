@@ -44,7 +44,7 @@
 												"$ref": "AAAAAAGD5c48xOQ4tuo="
 											},
 											"font": "Arial;13;0",
-											"left": 248.72998046875,
+											"left": 240.72998046875,
 											"top": 109,
 											"width": 33.5126953125,
 											"height": 13,
@@ -57,7 +57,7 @@
 												"$ref": "AAAAAAGD5c48xOQ4tuo="
 											},
 											"font": "Arial;13;1",
-											"left": 229,
+											"left": 221,
 											"top": 109,
 											"width": 14.72998046875,
 											"height": 13,
@@ -65,7 +65,7 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 224,
+									"left": 216,
 									"top": 104,
 									"width": 1793,
 									"height": 4625,
@@ -14174,11 +14174,11 @@
 											},
 											"font": "Arial;13;0",
 											"left": 904,
-											"top": 2371,
+											"top": 2368,
 											"width": 137.2998046875,
 											"height": 13,
-											"alpha": 1.5844930982915901,
-											"distance": 73.00684899377592,
+											"alpha": 1.6255350993611488,
+											"distance": 73.10950690573696,
 											"hostEdge": {
 												"$ref": "AAAAAAGIIcC2ciZfBWs="
 											},
