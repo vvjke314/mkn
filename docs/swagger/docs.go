@@ -19,7 +19,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/email": {
+        "/api/email": {
             "put": {
                 "security": [
                     {
@@ -67,7 +67,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/favorite": {
+        "/api/favorite": {
             "post": {
                 "security": [
                     {
@@ -116,7 +116,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/favorite/{project_id}": {
+        "/api/favorite/{project_id}": {
             "delete": {
                 "security": [
                     {
@@ -165,7 +165,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/favorites": {
+        "/api/favorites": {
             "get": {
                 "security": [
                     {
@@ -205,7 +205,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/login": {
+        "/api/login": {
             "post": {
                 "description": "Login user",
                 "produces": [
@@ -242,7 +242,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/logout": {
+        "/api/logout": {
             "get": {
                 "security": [
                     {
@@ -279,7 +279,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/project": {
+        "/api/project": {
             "post": {
                 "security": [
                     {
@@ -333,7 +333,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/project/section/notification/resend/{notification_id}": {
+        "/api/project/section/notification/resend/{notification_id}": {
             "put": {
                 "security": [
                     {
@@ -397,7 +397,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/project/section/notification/{notification_id}": {
+        "/api/project/section/notification/{notification_id}": {
             "get": {
                 "security": [
                     {
@@ -564,7 +564,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/project/section/{section_id}": {
+        "/api/project/section/{section_id}": {
             "put": {
                 "security": [
                     {
@@ -681,7 +681,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/project/section/{section_id}/notification": {
+        "/api/project/section/{section_id}/notification": {
             "post": {
                 "security": [
                     {
@@ -739,7 +739,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/project/section/{section_id}/notifications": {
+        "/api/project/section/{section_id}/notifications": {
             "get": {
                 "security": [
                     {
@@ -788,7 +788,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/project/{project_id}": {
+        "/api/project/{project_id}": {
             "put": {
                 "security": [
                     {
@@ -905,7 +905,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/project/{project_id}/collaborator": {
+        "/api/project/{project_id}/collaborator": {
             "post": {
                 "security": [
                     {
@@ -923,8 +923,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Collaborator ID",
-                        "name": "collaborator_id",
+                        "description": "Collaborator nickname",
+                        "name": "collaborator_name",
                         "in": "query",
                         "required": true
                     },
@@ -977,8 +977,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Collaborator ID",
-                        "name": "collaborator_id",
+                        "description": "Collaborator nickname",
+                        "name": "collaborator_name",
                         "in": "query",
                         "required": true
                     },
@@ -1015,7 +1015,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/project/{project_id}/collaborators": {
+        "/api/project/{project_id}/collaborators": {
             "get": {
                 "security": [
                     {
@@ -1064,7 +1064,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/project/{project_id}/section": {
+        "/api/project/{project_id}/section": {
             "post": {
                 "security": [
                     {
@@ -1122,7 +1122,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/project/{project_id}/sections": {
+        "/api/project/{project_id}/sections": {
             "get": {
                 "security": [
                     {
@@ -1171,7 +1171,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/projects": {
+        "/api/projects": {
             "get": {
                 "security": [
                     {
@@ -1211,7 +1211,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/projects/latest": {
+        "/api/projects/latest": {
             "get": {
                 "security": [
                     {
@@ -1251,7 +1251,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/projects/owned": {
+        "/api/projects/owned": {
             "get": {
                 "security": [
                     {
@@ -1291,7 +1291,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/signup": {
+        "/api/signup": {
             "post": {
                 "description": "Signup user",
                 "produces": [
@@ -1328,7 +1328,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/undelivered_notifications": {
+        "/api/undelivered_notifications": {
             "get": {
                 "description": "Allows the manager to view undelivered notifications",
                 "produces": [
@@ -1363,7 +1363,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/upcoming": {
+        "/api/upcoming": {
             "get": {
                 "security": [
                     {

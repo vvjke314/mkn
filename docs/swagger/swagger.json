@@ -12,7 +12,7 @@
     "host": "127.0.0.1:8080",
     "basePath": "/",
     "paths": {
-        "/email": {
+        "/api/email": {
             "put": {
                 "security": [
                     {
@@ -60,7 +60,7 @@
                 }
             }
         },
-        "/favorite": {
+        "/api/favorite": {
             "post": {
                 "security": [
                     {
@@ -109,7 +109,7 @@
                 }
             }
         },
-        "/favorite/{project_id}": {
+        "/api/favorite/{project_id}": {
             "delete": {
                 "security": [
                     {
@@ -158,7 +158,7 @@
                 }
             }
         },
-        "/favorites": {
+        "/api/favorites": {
             "get": {
                 "security": [
                     {
@@ -198,7 +198,7 @@
                 }
             }
         },
-        "/login": {
+        "/api/login": {
             "post": {
                 "description": "Login user",
                 "produces": [
@@ -235,7 +235,7 @@
                 }
             }
         },
-        "/logout": {
+        "/api/logout": {
             "get": {
                 "security": [
                     {
@@ -272,7 +272,7 @@
                 }
             }
         },
-        "/project": {
+        "/api/project": {
             "post": {
                 "security": [
                     {
@@ -326,7 +326,7 @@
                 }
             }
         },
-        "/project/section/notification/resend/{notification_id}": {
+        "/api/project/section/notification/resend/{notification_id}": {
             "put": {
                 "security": [
                     {
@@ -390,7 +390,7 @@
                 }
             }
         },
-        "/project/section/notification/{notification_id}": {
+        "/api/project/section/notification/{notification_id}": {
             "get": {
                 "security": [
                     {
@@ -557,7 +557,7 @@
                 }
             }
         },
-        "/project/section/{section_id}": {
+        "/api/project/section/{section_id}": {
             "put": {
                 "security": [
                     {
@@ -674,7 +674,7 @@
                 }
             }
         },
-        "/project/section/{section_id}/notification": {
+        "/api/project/section/{section_id}/notification": {
             "post": {
                 "security": [
                     {
@@ -732,7 +732,7 @@
                 }
             }
         },
-        "/project/section/{section_id}/notifications": {
+        "/api/project/section/{section_id}/notifications": {
             "get": {
                 "security": [
                     {
@@ -781,7 +781,7 @@
                 }
             }
         },
-        "/project/{project_id}": {
+        "/api/project/{project_id}": {
             "put": {
                 "security": [
                     {
@@ -898,7 +898,7 @@
                 }
             }
         },
-        "/project/{project_id}/collaborator": {
+        "/api/project/{project_id}/collaborator": {
             "post": {
                 "security": [
                     {
@@ -916,8 +916,8 @@
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Collaborator ID",
-                        "name": "collaborator_id",
+                        "description": "Collaborator nickname",
+                        "name": "collaborator_name",
                         "in": "query",
                         "required": true
                     },
@@ -970,8 +970,8 @@
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Collaborator ID",
-                        "name": "collaborator_id",
+                        "description": "Collaborator nickname",
+                        "name": "collaborator_name",
                         "in": "query",
                         "required": true
                     },
@@ -1008,7 +1008,7 @@
                 }
             }
         },
-        "/project/{project_id}/collaborators": {
+        "/api/project/{project_id}/collaborators": {
             "get": {
                 "security": [
                     {
@@ -1057,7 +1057,7 @@
                 }
             }
         },
-        "/project/{project_id}/section": {
+        "/api/project/{project_id}/section": {
             "post": {
                 "security": [
                     {
@@ -1115,7 +1115,7 @@
                 }
             }
         },
-        "/project/{project_id}/sections": {
+        "/api/project/{project_id}/sections": {
             "get": {
                 "security": [
                     {
@@ -1164,7 +1164,7 @@
                 }
             }
         },
-        "/projects": {
+        "/api/projects": {
             "get": {
                 "security": [
                     {
@@ -1204,7 +1204,7 @@
                 }
             }
         },
-        "/projects/latest": {
+        "/api/projects/latest": {
             "get": {
                 "security": [
                     {
@@ -1244,7 +1244,7 @@
                 }
             }
         },
-        "/projects/owned": {
+        "/api/projects/owned": {
             "get": {
                 "security": [
                     {
@@ -1284,7 +1284,7 @@
                 }
             }
         },
-        "/signup": {
+        "/api/signup": {
             "post": {
                 "description": "Signup user",
                 "produces": [
@@ -1321,7 +1321,7 @@
                 }
             }
         },
-        "/undelivered_notifications": {
+        "/api/undelivered_notifications": {
             "get": {
                 "description": "Allows the manager to view undelivered notifications",
                 "produces": [
@@ -1356,7 +1356,7 @@
                 }
             }
         },
-        "/upcoming": {
+        "/api/upcoming": {
             "get": {
                 "security": [
                     {
