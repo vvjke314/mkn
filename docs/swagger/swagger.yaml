@@ -948,6 +948,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Gets all projects
       tags:
       - project
