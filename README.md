@@ -12,9 +12,11 @@
 
 ### Документация:
 
-- Swagger: [посмотреть(preview)](https://vvjke314.github.io/mkn/) // [json-файл](https://github.com/vvjke314/mkn/tree/main/docs/swagger/swagger.json)
+- Swagger: [посмотреть(preview)](https://vvjke314.github.io/mkn/) // [json-файл](/docs/swagger/swagger.json)
 - Protobuf-contract: [proto-файл](/docs/proto/mail-service.proto)
-- Техническое задание - [pdf](https://github.com/vvjke314/mkn/tree/main/docs/tech-spec/TZ_Zaycev_Eremihin_Abramov.pdf) [docx](https://github.com/vvjke314/mkn/tree/main/docs/tech-spec/TZ_Zaycev_Eremihin_Abramov.docx)
+- Вся документация - [pdf](/docs/documentation.pdf) [docx](/docs/documentation.docx)
+- Презентация - [pdf](/docs/presentation.pdf) [pptx](/docs/presentation.pptx)
+- Техническое задание - [pdf](/docs/tech-spec/tech-spec.pdf) [docx (old)](/docs/tech-spec/TZ_Zaycev_Eremihin_Abramov.docx)
 
 ### Диаграммы
 
@@ -23,6 +25,18 @@
 [Файл](/docs/diagrams/er.mdj)
 
 ![ER-диаграмма](/docs/diagrams/er.png)
+
+#### Диаграмма последовательности (frontend)
+
+![Sequence-диаграмма (frontend)](/docs/diagrams/FS.png)
+
+#### Диаграмма последовательности (backend)
+
+![Sequence-диаграмма (backend)](/docs/diagrams/BS.png)
+
+#### Диаграмма последовательности (интеграция)
+
+![Sequence-диаграмма (integration)](/docs/diagrams/IS.png)
 
 #### Диаграмма прецендентов
 
