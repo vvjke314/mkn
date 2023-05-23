@@ -190,7 +190,7 @@ info:
   title: MKN API
   version: "1.0"
 paths:
-  /email:
+  /api/email:
     put:
       description: Changes user email
       parameters:
@@ -220,7 +220,7 @@ paths:
       summary: Changes user email
       tags:
       - user
-  /favorite:
+  /api/favorite:
     post:
       description: Add favorite project
       parameters:
@@ -251,7 +251,7 @@ paths:
       summary: Add favorite project
       tags:
       - favorite_project
-  /favorite/{project_id}:
+  /api/favorite/{project_id}:
     delete:
       description: Delete favorite user project
       parameters:
@@ -282,7 +282,7 @@ paths:
       summary: Delete favorite project
       tags:
       - favorite_project
-  /favorites:
+  /api/favorites:
     get:
       description: Returns favorite projects
       produces:
@@ -307,7 +307,7 @@ paths:
       summary: Gets favorite projects
       tags:
       - favorite_project
-  /login:
+  /api/login:
     post:
       description: Login user
       parameters:
@@ -331,7 +331,7 @@ paths:
       summary: Login user
       tags:
       - auth
-  /logout:
+  /api/logout:
     get:
       description: Logout user
       produces:
@@ -354,7 +354,7 @@ paths:
       summary: Logout user
       tags:
       - auth
-  /project:
+  /api/project:
     post:
       description: Creates project
       parameters:
@@ -388,7 +388,7 @@ paths:
       summary: Creates project
       tags:
       - project
-  /project/{project_id}:
+  /api/project/{project_id}:
     delete:
       description: Deletes a specific project and returns all owned projects
       parameters:
@@ -464,14 +464,14 @@ paths:
       summary: Update project
       tags:
       - project
-  /project/{project_id}/collaborator:
+  /api/project/{project_id}/collaborator:
     delete:
       description: Removes a collaborator from the current project and returns all
         collaborators of this project
       parameters:
-      - description: Collaborator ID
+      - description: Collaborator nickname
         in: query
-        name: collaborator_id
+        name: collaborator_name
         required: true
         type: string
       - description: Project ID
@@ -505,9 +505,9 @@ paths:
       description: Adds a collaborator to the current project and returns all collaborators
         of this project
       parameters:
-      - description: Collaborator ID
+      - description: Collaborator nickname
         in: query
-        name: collaborator_id
+        name: collaborator_name
         required: true
         type: string
       - description: Project ID
@@ -537,7 +537,7 @@ paths:
       summary: Adds collaborators
       tags:
       - collaborations
-  /project/{project_id}/collaborators:
+  /api/project/{project_id}/collaborators:
     get:
       description: Returns all collaborators of the project
       parameters:
@@ -568,7 +568,7 @@ paths:
       summary: Returns collaborators
       tags:
       - collaborations
-  /project/{project_id}/section:
+  /api/project/{project_id}/section:
     post:
       description: Creates a section in the project
       parameters:
@@ -605,7 +605,7 @@ paths:
       summary: Creates section
       tags:
       - section
-  /project/{project_id}/sections:
+  /api/project/{project_id}/sections:
     get:
       description: Returns all sections of the current project
       parameters:
@@ -636,7 +636,7 @@ paths:
       summary: Returns all sections
       tags:
       - section
-  /project/section/{section_id}:
+  /api/project/section/{section_id}:
     delete:
       description: Deletes section from current project
       parameters:
@@ -711,7 +711,7 @@ paths:
       summary: Updates section
       tags:
       - section
-  /project/section/{section_id}/notification:
+  /api/project/section/{section_id}/notification:
     post:
       description: Creates notification in accordance with the entered parameters
       parameters:
@@ -748,7 +748,7 @@ paths:
       summary: Creates notification
       tags:
       - notification
-  /project/section/{section_id}/notifications:
+  /api/project/section/{section_id}/notifications:
     get:
       description: Returns all notifications in the current section
       parameters:
@@ -779,7 +779,7 @@ paths:
       summary: Gets All Notifications
       tags:
       - notification
-  /project/section/notification/{notification_id}:
+  /api/project/section/notification/{notification_id}:
     delete:
       description: Update information about a specific notification
       parameters:
@@ -887,7 +887,7 @@ paths:
       summary: Update notifications
       tags:
       - notification
-  /project/section/notification/resend/{notification_id}:
+  /api/project/section/notification/resend/{notification_id}:
     put:
       description: Resend notification
       parameters:
@@ -928,7 +928,7 @@ paths:
       summary: Resend notification
       tags:
       - notification
-  /projects:
+  /api/projects:
     get:
       description: Returns all projects
       produces:
@@ -948,10 +948,12 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/app.errorResponse'
+      security:
+      - BearerAuth: []
       summary: Gets all projects
       tags:
       - project
-  /projects/latest:
+  /api/projects/latest:
     get:
       description: Returns the last six projects by last edit time
       produces:
@@ -976,7 +978,7 @@ paths:
       summary: Returns last 6 projects
       tags:
       - project
-  /projects/owned:
+  /api/projects/owned:
     get:
       description: Gets all owned project
       produces:
@@ -1001,7 +1003,7 @@ paths:
       summary: Gets all owned project
       tags:
       - project
-  /signup:
+  /api/signup:
     post:
       description: Signup user
       parameters:
@@ -1025,7 +1027,7 @@ paths:
       summary: Signup user
       tags:
       - auth
-  /undelivered_notifications:
+  /api/undelivered_notifications:
     get:
       description: Allows the manager to view undelivered notifications
       produces:
@@ -1048,7 +1050,7 @@ paths:
       summary: Gets undelivired notifications
       tags:
       - notification
-  /upcoming:
+  /api/upcoming:
     get:
       description: Returns upcoming notifications
       produces:
