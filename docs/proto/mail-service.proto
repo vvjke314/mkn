@@ -3,13 +3,11 @@ syntax = "proto3";
 message ScheduleRequest { 
     int32 notification_id = 1;
     string deadline = 2;
-    
 }
+
 message ScheduleResponse {
     int32 add_status = 1;
 }
-
-
 
 message NotificationInfoRequest {
     int32 notification_id = 1;
@@ -42,10 +40,8 @@ message CancelNotificationResponse {
 }
 
 service MailingService {
-    
     rpc ScheduleNotification (ScheduleRequest) returns (ScheduleResponse);
     rpc CancelNotification (CancelNotificationRequest) returns (CancelNotificationResponse);
-    
 }
 
 service BackendService {
