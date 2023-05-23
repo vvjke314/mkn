@@ -23,35 +23,34 @@
 #### ER-диаграмма
 
 [Файл](/docs/diagrams/er.mdj)
-
 ![ER-диаграмма](/docs/diagrams/er.png)
 
 #### Диаграмма последовательности (frontend)
 
+[Файл](/docs/diagrams/front-sequence.mdj)
 ![Sequence-диаграмма (frontend)](/docs/diagrams/FS.png)
 
 #### Диаграмма последовательности (backend)
 
+[Файл](/docs/diagrams/back-sequence.mdj)
 ![Sequence-диаграмма (backend)](/docs/diagrams/BS.png)
 
 #### Диаграмма последовательности (интеграция)
 
+[Файл](/docs/diagrams/integration-sequence.mdj)
 ![Sequence-диаграмма (integration)](/docs/diagrams/IS.png)
 
 #### Диаграмма прецендентов
 
 [Файл](/docs/diagrams/usecase.mdj)
-
 ![Диаграмма прецендентов](/docs/diagrams/usec.png)
 
 #### Диаграмма развертывания
 
 [Файл](/docs/diagrams/deploy.mdj)
-
 ![Диаграмма развертывания](/docs/diagrams/deploy.png)
 
 #### Диаграмма деятельности
 
 [Файл](/docs/diagrams/activity.drawio)
-
 ![Диаграмма деятельности](/docs/diagrams/activity.png)
