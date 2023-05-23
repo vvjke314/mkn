@@ -28,13 +28,13 @@
 
 [Файл](/docs/diagrams/usecase.mdj)
 
-![Диаграмма прецендентов](/docs/diagrams/usecase.png)
+![Диаграмма прецендентов](/docs/diagrams/usec.png)
 
 #### Диаграмма развертывания
 
 [Файл](/docs/diagrams/deploy.mdj)
 
-![Диаграмма развертывания](/docs/diagrams/deployment.png)
+![Диаграмма развертывания](/docs/diagrams/deploy.png)
 
 #### Диаграмма деятельности
 
